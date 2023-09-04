@@ -4,15 +4,11 @@ import openai
 from pydantic import BaseModel, Field
 
 
-class User(BaseModel):
-    """This is a basemodel"""
-    name: str = Field("Name of user")
-    age: int = Field("age of user")
-    title_: str = Field("Title of the user")
+class BaseModel(BaseModel):
 
-    @property
-    def openai_schema(self):
-        data = self.model_json_schema()
+    @classmethod
+    def openai_schema(cls):
+        data = cls.model_json_schema()
 
         # Remove keys with name 'title'
         result = remove_keys_with_name(data, 'title')
