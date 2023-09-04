@@ -1,7 +1,7 @@
-import json
+from typing import List
 
 import openai
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 def openai_schema(cls):
@@ -25,3 +25,17 @@ def remove_keys_with_name(json_obj, key_to_remove):
         return [remove_keys_with_name(item, key_to_remove) for item in json_obj]
     else:
         return json_obj
+
+
+def oa_completion(
+    messages: List,
+    functions: List,
+    function_call: str = "auto",
+    model: str = "gpt-3.5-turbo",
+):
+    response = openai.ChatCompletion.create(
+        model=model, messages=messages, functions=functions, function_call=function_call
+    )
+    response_message = response["choices"][0]["message"]
+
+    return response_message
