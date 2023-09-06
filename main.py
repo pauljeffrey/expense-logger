@@ -55,12 +55,12 @@ def process_email(data):
     content: Content = extract_fn(data=data)
 
     if not os.path.exists(CSV_FILE_PATH):
-        with open(CSV_FILE_PATH, "r") as f:
+        with open(CSV_FILE_PATH, "w") as f:
             f.write("category,amount,summary,date\n")
 
     with open(CSV_FILE_PATH, "a") as f:
         f.write(
-            f"{content.category},{content.amount},{content.summary},{content.date}\n"
+            f"{content.category.value},{content.amount},{content.summary},{content.date}\n"
         )
 
 
