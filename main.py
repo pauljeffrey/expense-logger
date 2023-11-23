@@ -71,4 +71,5 @@ async def log_email(data: Email, background_tasks: BackgroundTasks):
 
 @app.get("/")
 async def get_response():
+    print("bleh bleh bleh")
     return "This page is currently being worked on."
