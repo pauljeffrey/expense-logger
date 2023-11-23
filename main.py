@@ -68,3 +68,7 @@ def process_email(data):
 async def log_email(data: Email, background_tasks: BackgroundTasks):
     background_tasks.add_task(process_email, data.body)
     return "Successfully received data"
+
+@app.get("/")
+async def get_response():
+    return "This page is currently being worked on."
